@@ -1,8 +1,12 @@
 <div class="center jumbotron">
   <div class="text-center">
     <h1>game review logo</h1>
-      <p>ゲームのレビューの投稿、お気に入り機能はログインが必要です。</p>
-        <p>ログイン　or　会員登録</p>
+        <div class="center jumbotron">
+          <div class="text-center">
+            <h4>ゲームのレビューの投稿、お気に入り機能はログインが必要です。</h4>
+          <%= link_to 'ログインに変えてね', signup_path, class: 'btn btn-lg btn-primary' %> or <%= link_to '会員登録', signup_path, class: 'btn btn-lg btn-primary' %>
+          </div>
+        </div>
         
       <h3>新着のレビュー</h3>
         <p>中身</p>
