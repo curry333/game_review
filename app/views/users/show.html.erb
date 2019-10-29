@@ -1,14 +1,13 @@
 <div class="row">
   <aside class="col-sm-4">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
-      </div>
-      <div class="card-body">
-        <img class="rounded img-fluid" src="#">
-      </div>
-    </div>
-    <p><%= link_to 'ユーザ情報編集', edit_user_path(@user) %></p>
+    <ul class="list-unstyled">
+      <%= image_tag @user.image.thumb100.to_s %>
+      <%= @user.name %>
+        <% if current_user == @user %>
+          <p><%= link_to 'ユーザ情報編集', edit_user_path(@user) %></p>
+        <% else %>
+        <% end %>
+    </ul>
   </aside>
   <div class="col-sm-8">
     <p>中身</p>

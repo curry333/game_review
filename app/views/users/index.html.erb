@@ -2,22 +2,11 @@
 <% if users.any? %>
   <ul class="list-unstyled">
     <% users.each do |user| %>
-      <li class="media">
-        <img class="mr-2 rounded" src="#">
-        <div class="media-body">
-          <div>
-            <%= user.name %>
-          </div>
-          <div>
-            <p><%= link_to 'ユーザ詳細', user_path(user) %></p>
-          </div>
-        </div>
-      </li>
+      <%= image_tag user.image.thumb100.to_s %>
+      <%= user.name %>
+      <p><%= link_to 'ユーザ詳細', user_path(user) %></p>
+      
     <% end %>
   </ul>
   <%= paginate users %>
 <% end %>
-
-
-
-<!--　6行目のsrcに入れて画像表示したい 　"<"   %= "/user_images/#{@user.image_name}" %>　  "<"  %= image_tag user.image.thumb.url %>-->
