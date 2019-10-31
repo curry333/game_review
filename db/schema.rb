@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_013546) do
+ActiveRecord::Schema.define(version: 2019_10_31_075323) do
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_013546) do
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.float "score"
-    t.string "review"
+    t.text "review"
     t.bigint "user_id"
     t.bigint "game_id"
     t.datetime "created_at", null: false

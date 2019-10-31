@@ -1,2 +1,27 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<div class="text-center">
+  <h4>レビュー投稿</h4>
+  <br>
+  <br>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= form_with(model: @review, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      
+      
+      
+      <div class="form-group">
+        <%= f.label :review, 'レビュー(500文字まで)' %>
+        <%= f.text_area :review, class: 'form-control' %>
+      </div>
+      
+      <%= f.submit '登録', class: 'btn btn-primary btn-sm' %>
+      <br>
+      <br>
+      <%= link_to 'キャンセル', user_path(current_user), class: 'btn btn-sm btn-dark' %>
+    <% end %>
+
+  </div>
+</div>
