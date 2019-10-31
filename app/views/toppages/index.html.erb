@@ -1,34 +1,32 @@
 <% if logged_in? %>
-<div class="center jumbotron">
-  <div class="text-center">
-    <h1>game review logo</h1>
-      <br>
-      <br>
-      <br>
-      <h3>新着のレビュー</h3>
-        <p>中身</p>
-      <h3>評価ランキング</h3>
-        <p>中身</p>
-      <p>レビュー一覧へ</p>
-  </div>
+<div class="text-center">
+  <h1>game review logo</h1>
+    <br>
+    <br>
+    <br>
+    <h3>新着のレビュー</h3>
+      <p>レビュー作ってから</p>
+    <h3>評価ランキング</h3>
+      <p>レビュー作ってから</p>
+    <p>レビュー一覧へ</p>
 </div>
   
 <% else %>
-<div class="center jumbotron">
   <div class="text-center">
-    <h1>game review logo</h1>
-        <div class="center jumbotron">
-          <div class="text-center">
-            <h4>ゲームのレビューの投稿、お気に入り機能はログインが必要です。</h4>
-          <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-primary' %> or <%= link_to '会員登録', signup_path, class: 'btn btn-lg btn-primary' %>
-          </div>
-        </div>
-        
+  <h1>game review logo</h1>
+    <br>
+    <br>
+    <br>
+    <div class="text-center">
+      <h4>ゲームのレビューの投稿、お気に入り機能はログインが必要です。</h4>
+      <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-primary' %> or <%= link_to '会員登録', signup_path, class: 'btn btn-lg btn-primary' %>
+      <br>
+      <br>
+      <br>
       <h3>新着のレビュー</h3>
-        <p>中身</p>
+        <p>レビュー作ってから</p>
       <h3>評価ランキング</h3>
-        <p>中身</p>
-      <p>レビュー一覧へ</p>
+        <p>レビュー作ってから</p>
+      <p><%= link_to 'レビュー一覧へ 後でパスなおす', root_url, class: 'btn btn-sm btn-primary' %></p>
   </div>
-</div>
 <% end %>
