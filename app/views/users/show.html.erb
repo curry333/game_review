@@ -14,32 +14,20 @@
     <br>
     <li><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
     <br>
+    <% if current_user == @user %>
     <li><%= link_to '新規レビュー投稿', new_review_path, class: 'btn btn-sm btn-primary' %></li>
+    <% else %>
+    <% end %>
     <br>
     <br>
     <h4>投稿したレビュー</h4>
-    <br>
-    こっからeachで表示　レビュー出来てから作る
-    <li>ゲームタイトル　サンプル</li>
-    <br>
-    <li><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
-    <br>
-    <li>発売元メーカー　サンプル</li>
-    <br>
-    <li><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
-    <br>
-    <li>評価　星5</li>
-    <br>
-    <br>
-    <h5>レビュー</h5>
-    <br>
-    <li>投稿日時　引っ張ってくる</li>
-    <br>
-    <li><%= link_to '投稿編集 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
-    <br>
-    <li><%= link_to '投稿削除 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
-    <br>
-    <li>
+      <% @reviews.each do |review| %>
+      <br>
+      <li>ゲームタイトル　<%= review.game.title %></li>
+      <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
+      <li>発売元メーカー　<%= review.game.maker.maker %></li>
+      <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
+      <li>評価　<%= review.score %></li>
       <div class="panel-group" id="accordion">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -49,7 +37,8 @@
           </div>
           <div id="collapse3" class="panel-collapse collapse in">
             <div class="panel-body">
-              <p>ここにレビュー内容を引っ張ってくる</p>
+              <li>投稿日時　<%= review.created_at %></li>
+              <li><%= review.review %></li>
               <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
             </div>
           </div>
@@ -60,29 +49,22 @@
               <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">コメントの表示・非表示</a>
             </p>
           </div>
-          <div id="collapse4" class="panel-collapse collapse">
+          <div id="collapse4" class="panel-collapse collapse in">
             <div class="panel-body">
-              <p>ここにコメントを引っ張ってくる</p>
-              <p>
-                ここに投稿フォーム　コメントができてから
-                <!-- 最初の"<"外した
-                %= form_with(model: @comment, local: true) do |f| %>
-                  %= render 'layouts/error_messages', model: f.object %>
-      
-                  div class="form-group">
-                    %= f.label :comment, 'コメント' %>
-                    %= f.text_field :comment, class: 'form-control' %>
-                  /div>
-                  
-                  %= f.submit '投稿', class: 'btn btn-primary btn-sm' %>
-                % end %>
-                -->
-              </p>
+              <li>ここにコメントと投稿フォーム</li>
             </div>
           </div>
         </div>
       </div>
-    </li>
+      <% if current_user == review.user %>
+        <li><%= link_to '投稿編集', edit_review_path(review), class: 'btn btn-sm btn-primary' %></li>
+        <br>
+        <li><%= link_to "投稿削除", review, method: :delete, data: { confirm: "この投稿を削除してよろしいですか?" }, class: 'btn btn-danger btn-sm' %></li>
+      <% end %>
+      <br>
+      <br>
+      <br>
+      <% end %>
   </ul>
 </div>
 

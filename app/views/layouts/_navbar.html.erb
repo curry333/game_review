@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-        <li class="nav-item"><a href="#" class="nav-link">レビュー一覧</a></li>
+        <li class="nav-item"><%= link_to 'レビュー一覧', reviews_path, class: 'nav-link' %></li>
         <li class="nav-item"><%= link_to 'ユーザ一覧', users_path, class: 'nav-link' %></li>
         <li class="nav-item"><a href="#" class="nav-link">お気に入り</a></li>
           <li class="nav-item dropdown">
@@ -20,7 +20,7 @@
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><a href="#" class="nav-link">レビュー一覧</a></li>
+          <li class="nav-item"><%= link_to 'レビュー一覧', reviews_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'ユーザ一覧', users_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
         <% end %>
@@ -31,4 +31,4 @@
 </header>
 
 
-<!-- 13行目のpathをuser_path(user)したい-->
+

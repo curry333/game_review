@@ -9,7 +9,7 @@ class GamesController < ApplicationController
 
     if @game.save
       flash[:success] = 'ゲームタイトルを登録しました。'
-      redirect_to root_url
+      redirect_to new_review_path
     else
       flash.now[:danger] = 'ゲームタイトルの登録に失敗しました。'
       render :new

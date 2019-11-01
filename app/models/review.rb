@@ -3,5 +3,5 @@ class Review < ApplicationRecord
   belongs_to :game
   
   validates :review, presence: true, length: { maximum: 500 }
-  validates :score, presence: true, length: { maximum: 5 }
+  validates :score, presence: true, length: { maximum: 3 }
 end
