@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :makers, only: [:new, :create]
   resources :games, only: [:new, :create]
   resources :reviews, only: [:index, :new, :create, :destroy, :edit, :update]
+  resources :comments, only: [:new, :create]
 end

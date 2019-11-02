@@ -1,15 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="text-center">
   <h1>レビュー一覧</h1>
   <br>
   <br>
   <br>
   <ul class="list-unstyled">
-    <li>ユーザネーム検索ボックス</li>
-    <li>ゲームタイトル検索ボックス</li>
-    <li>発売元メーカー検索ボックス</li>
-    <li>並び替えボックスと検索ボタン</li>
-    <br>
     
+    <%= form_with(scope: :search, url: reviews_path, method: :get, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, 'ユーザネーム' %>
+        <%= f.text_field :name, value: @search_params[:name] %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label :game_id, 'ゲームタイトル' %>
+        <%= f.collection_select :game_id, Game.all, :id, :title, selected: @search_params[:game_id], include_blank: '選択' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :maker_id, '発売元メーカー' %>
+        <%= f.collection_select :maker_id, Maker.all, :id, :maker, selected: @search_params[:maker], include_blank: '選択'%>
+      </div>
+    
+      <%= f.submit '絞り込み', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+      評価順で並べ替えたい
+    <br>
+    <br>
     <% @reviews.each do |review| %>
     <li>ユーザネーム　<%= review.user.name %></li>
     <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
@@ -18,34 +35,26 @@
     <li>発売元メーカー　<%= review.game.maker.maker %></li>
     <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
     <li>評価　<%= review.score %></li>
-    <div class="panel-group" id="accordion">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <p class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">レビューの表示・非表示</a>
-          </p>
-        </div>
-        <div id="collapse3" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <li>投稿日時　<%= review.created_at %></li>
-            <li><%= review.review %></li>
-            <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <p class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">コメントの表示・非表示</a>
-          </p>
-        </div>
-        <div id="collapse4" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <li>ここにコメントと投稿フォーム</li>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ul class="list-unstyled">
+      <li>
+        <p class="btn btn-info btn-sm" >レビューの表示・非表示</p>
+        <ul class="list-unstyled" style="display: none;">
+          <li class="content1-1">投稿日時　<%= review.created_at %></li>
+          <li class="content1-2"><%= review.review %></li>
+          <li class="content1-3"><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
+          <br>
+        </ul>
+      </li>
+      <li>
+        <p class="btn btn-info btn-sm">コメントの表示・非表示</p>
+        <ul class="list-unstyled" style="display: none;">
+            <li class="content2-1">コメント日時</li>
+            <li class="content2-2">コメント内容</li>
+            <li class="content2-3"><%#= render 'comments/new' %></li>
+            <br>
+        </ul>
+      </li>
+    </ul>
     <br>
     <br>
     <% end %>
@@ -53,3 +62,18 @@
   </ul>
   <%= paginate @reviews %>
 </div>
+
+
+
+<script>
+$(function(){
+ 
+    //.accordion1の中のp要素がクリックされたら
+	$('.list-unstyled p').click(function(){
+ 
+		//クリックされた.accordion1の中のp要素に隣接するul要素が開いたり閉じたりする。
+		$(this).next('ul').slideToggle();
+ 
+	});
+});
+</script>

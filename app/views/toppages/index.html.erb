@@ -8,7 +8,8 @@
     <h3>新着のレビュー</h3>
     <ul class="list-unstyled">
       <% @reviews.each do |review| %>
-        <li>投稿日時: <%= review.created_at %>　ユーザネーム: <%= review.user.name %>　ゲームタイトル: <%= review.game.title %>　　発売元メーカー: <%= review.game.maker.maker %>　<%= link_to 'このユーザのレビューを見る', user_path(review.user_id), class: 'btn btn-sm btn-primary' %></li>
+        <li>投稿日時: <%= review.created_at %>　ユーザネーム: <%= review.user.name %></li>
+        <li>ゲームタイトル: <%= review.game.title %>　　発売元メーカー: <%= review.game.maker.maker %>　<%= link_to 'このユーザのレビューを見る', user_path(review.user_id), class: 'btn btn-sm btn-primary' %></li>
       <br>
       <% end %>
     </ul>

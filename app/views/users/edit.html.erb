@@ -33,7 +33,10 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
 
-      <%= f.submit '編集を完了する', class: 'btn btn-primary btn-block' %>
+      <%= f.submit '編集を完了する', class: 'btn btn-primary btn-sm' %>
+      <br>
+      <br>
+      <%= link_to 'キャンセル', user_path(current_user), class: 'btn btn-sm btn-dark' %>
     <% end %>
   </div>
 </div>

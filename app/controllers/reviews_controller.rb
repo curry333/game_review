@@ -3,7 +3,8 @@ class ReviewsController < ApplicationController
   before_action :correct_user, only: [:destroy, :edit, :update]
   
   def index
-    @reviews = Review.order(id: :desc).page(params[:page])
+    @search_params = user_search_params
+    @reviews = Review.search(@search_params).order(id: :desc).page(params[:page])
   end
 
   def new
@@ -35,10 +36,10 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
  
     if @review.update(review_params)
-      flash[:success] = 'ユーザー情報を編集しました。'
+      flash[:success] = 'レビューを編集しました。'
       render :edit
     else
-      flash.now[:danger] = 'ユーザー情報の編集に失敗しました。'
+      flash.now[:danger] = 'レビューの編集に失敗しました。'
     render :edit
     end   
   end
@@ -47,6 +48,10 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:game_id, :score, :review)
+  end
+  
+  def user_search_params
+    params.fetch(:search, {}).permit(:name, :game_id, :maker_id)
   end
   
   def correct_user
