@@ -4,11 +4,27 @@
     <br>
     <br>
     <br>
+    
     <h3>新着のレビュー</h3>
-      <p>レビュー作ってから</p>
+    <ul class="list-unstyled">
+      <% @reviews.each do |review| %>
+        <li>投稿日時: <%= review.created_at %>　ユーザネーム: <%= review.user.name %>　ゲームタイトル: <%= review.game.title %>　　発売元メーカー: <%= review.game.maker.maker %>　<%= link_to 'このユーザのレビューを見る', user_path(review.user_id), class: 'btn btn-sm btn-primary' %></li>
+      <br>
+      <% end %>
+    </ul>
+    
     <h3>評価ランキング</h3>
-      <p>レビュー作ってから</p>
-    <p>レビュー一覧へ</p>
+    <ul class="list-unstyled">
+      <% @ranks.first(5).each.with_index(1) do |(game_id, score), i| %>
+      　<li>第 <%= i %> 位</li>
+        <% top5 = Review.find_by(game_id: game_id) %>
+        <li>ゲームタイトル: <%= top5.game.title %></li>
+        <li>発売元メーカー: <%= top5.game.maker.maker %></li>
+        <li>評価平均: <%= score.floor(2).to_f %></li>
+      <% end %>
+    </ul>
+    
+    <p><%= link_to 'レビュー一覧へ', reviews_path, class: 'btn btn-sm btn-primary' %></p>
 </div>
   
 <% else %>
@@ -23,10 +39,26 @@
       <br>
       <br>
       <br>
+      
       <h3>新着のレビュー</h3>
-        <p>レビュー作ってから</p>
-      <h3>評価ランキング</h3>
-        <p>レビュー作ってから</p>
-      <p><%= link_to 'レビュー一覧', reviews_path, class: 'nav-link' %></p>
+    <ul class="list-unstyled">
+      <% @reviews.each do |review| %>
+        <li>投稿日時: <%= review.created_at %>　ユーザネーム: <%= review.user.name %>　ゲームタイトル: <%= review.game.title %>　　発売元メーカー: <%= review.game.maker.maker %>　<%= link_to 'このユーザのレビューを見る', user_path(review.user_id), class: 'btn btn-sm btn-primary' %></li>
+      <br>
+      <% end %>
+    </ul>
+    
+    <h3>評価ランキング</h3>
+    <ul class="list-unstyled">
+      <% @ranks.first(5).each.with_index(1) do |(game_id, score), i| %>
+      　<li>第 <%= i %> 位</li>
+        <% top5 = Review.find_by(game_id: game_id) %>
+        <li>ゲームタイトル: <%= top5.game.title %></li>
+        <li>発売元メーカー: <%= top5.game.maker.maker %></li>
+        <li>評価平均: <%= score.floor(2).to_f %></li>
+      <% end %>
+    </ul>
+    
+      <p><%= link_to 'レビュー一覧へ', reviews_path, class: 'nav-link' %></p>
   </div>
 <% end %>
