@@ -3,22 +3,25 @@ class CommentsController < ApplicationController
   
   def new
     @comment = Comment.new
+    @review_id = Review.find(params[:review_id]).id
   end
-
+  
   def create
-    @comment = current_user.comment.build(comment_params)
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = 'コメントを投稿しました。'
       redirect_to reviews_path
     else
-      flash.now[:danger] = 'コメントの投稿に失敗しました。'
-      render reviews_path
+      flash[:danger] = 'コメントの投稿に失敗しました。'
+      redirect_to reviews_path
     end
   end
   
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id, :review_id, :comment)
+    params.require(:comment).permit(:comment, :review_id)
   end
+  
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_072200) do
+ActiveRecord::Schema.define(version: 2019_11_03_074001) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "comment"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2019_11_02_072200) do
     t.datetime "updated_at", null: false
     t.index ["review_id"], name: "index_comments_on_review_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_favorites_users_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_favorites_users_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_favorites_users_on_user_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -58,6 +68,8 @@ ActiveRecord::Schema.define(version: 2019_11_02_072200) do
 
   add_foreign_key "comments", "reviews"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites_users", "users"
+  add_foreign_key "favorites_users", "users", column: "follow_id"
   add_foreign_key "games", "makers"
   add_foreign_key "reviews", "games"
   add_foreign_key "reviews", "users"

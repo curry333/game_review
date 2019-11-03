@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update]
+  before_action :require_user_logged_in, only: [:edit, :update, :followings]
   def index
     @users = User.order(id: :desc).page(params[:page]).per(10)
   end
@@ -45,6 +45,12 @@ class UsersController < ApplicationController
     else
     redirect_to root_url
     end
+  end
+  
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
   end
   
   private
