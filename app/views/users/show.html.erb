@@ -1,4 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<% if logged_in? %>
+
 <div class="text-center">
   <h1>ユーザ詳細</h1>
   <br>
@@ -67,6 +70,74 @@
       <% end %>
   </ul>
 </div>
+
+<% else %>
+
+<div class="text-center">
+  <h1>ユーザ詳細</h1>
+  <br>
+  <br>
+  <br>
+  <ul class="list-unstyled">
+    <li><%= image_tag @user.image.thumb.to_s %></li>
+    <% if current_user == @user %>
+      <li><%= link_to 'ユーザ情報編集', edit_user_path(@user), class: 'btn btn-sm btn-primary' %></li>
+    <% else %>
+    <% end %>
+    <br>
+    <li>ユーザネーム　<%= @user.name %></li>
+    <br>
+    <% if current_user == @user %>
+    <li><%= link_to '新規レビュー投稿', new_review_path, class: 'btn btn-sm btn-primary' %></li>
+    <% else %>
+    <% end %>
+    <br>
+    <br>
+    <h4>投稿したレビュー</h4>
+      <% @reviews.each do |review| %>
+      <br>
+      <li>ゲームタイトル　<%= review.game.title %></li>
+      <li>発売元メーカー　<%= review.game.maker.maker %></li>
+      <li>評価　<%= review.score %></li>
+      <ul class="list-unstyled">
+        <li>
+          <p class="btn btn-info btn-sm" >レビューの表示・非表示</p>
+          <ul class="list-unstyled" style="display: none;">
+            <li class="content1-1">投稿日時　<%= review.created_at %></li>
+            <li class="content1-2"><%= review.review %></li>
+            <br>
+          </ul>
+        </li>
+        <li>
+          <p class="btn btn-info btn-sm">コメントの表示・非表示</p>
+          <ul class="list-unstyled" style="display: none;">
+            <li>
+            <% comments = Comment.where(review_id: review.id) %>
+            <% comments.each do |comment| %>
+              投稿日時: <%= comment.created_at  %>　ユーザネーム: <%= comment.user.name  %>
+              <br>
+              コメント内容:　<%= comment.comment  %>
+              <br>
+              <br>
+            <% end %>
+            <%= link_to 'コメント投稿画面へ', new_review_comment_path(review.id), class: 'btn btn-sm btn-primary' %>
+          </li>
+          </ul>
+        </li>
+      </ul>
+      <% if current_user == review.user %>
+        <li><%= link_to '投稿編集', edit_review_path(review), class: 'btn btn-sm btn-primary' %></li>
+        <br>
+        <li><%= link_to "投稿削除", review, method: :delete, data: { confirm: "この投稿を削除してよろしいですか?" }, class: 'btn btn-danger btn-sm' %></li>
+      <% end %>
+      <br>
+      <br>
+      <br>
+      <% end %>
+  </ul>
+</div>
+
+<% end %>
 
 <script>
 $(function(){

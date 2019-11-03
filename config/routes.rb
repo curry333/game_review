@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :new, :create, :edit, :update] do
     member do
       get :followings
-      get :followers
+      get :favindex
     end
   end
+  
+  
+  
   resources :favorites_users, only: [:create, :destroy]
   resources :makers, only: [:new, :create]
   resources :games, only: [:new, :create]

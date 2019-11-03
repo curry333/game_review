@@ -1,0 +1,13 @@
+<div class="text-center">
+    <h3>お気に入り一覧</h3>
+    <br>
+    <br>
+    <br>
+<ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="<% favindex_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favindex_user_path(@user)) %>">お気に入りユーザ</a></li>
+      <li class="nav-item"><a href="#" class="nav-link <%#= 'active' if current_page?(followings_user_path(@user)) %>">お気に入りレビュー</a></li>
+      <li class="nav-item"><a href="#" class="nav-link <%#= 'active' if current_page?(followings_user_path(@user)) %>">お気に入りゲームタイトル</a></li>
+      <li class="nav-item"><a href="#" class="nav-link <%#= 'active' if current_page?(followings_user_path(@user)) %>">お気に入り発売元メーカー</a></li>
+</ul>
+
+<%= render 'user_following', followings: @followings %>

@@ -1,4 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<% if logged_in? %>
+
 <div class="text-center">
   <h1>レビュー一覧</h1>
   <br>
@@ -29,7 +32,7 @@
     <br>
     <% @reviews.each do |review| %>
     <li>ユーザネーム　<%= review.user.name %></li>
-    <p><%= render 'favorites_users/follow_button', user: review.user %></p>
+    <p><%= link_to 'ユーザ詳細へ', user_path(review.user), class: 'btn btn-sm btn-primary' %></p>
     <li>ゲームタイトル　<%= review.game.title %></li>
     <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
     <li>発売元メーカー　<%= review.game.maker.maker %></li>
@@ -70,6 +73,76 @@
   <%= paginate @reviews %>
 </div>
 
+<% else %>
+
+<div class="text-center">
+  <h1>レビュー一覧</h1>
+  <br>
+  <br>
+  <br>
+  <ul class="list-unstyled">
+    
+    <%= form_with(scope: :search, url: reviews_path, method: :get, local: true) do |f| %>
+      <div class="form-group">
+        <%#= f.label :name, 'ユーザネーム' %>
+        <%#= f.text_field :name, value: @search_params[:name] %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label :game_id, 'ゲームタイトル' %>
+        <%= f.collection_select :game_id, Game.all, :id, :title, selected: @search_params[:game_id], include_blank: '選択' %>
+      </div>
+      
+      <div class="form-group">
+        <%#= f.label :maker_id, '発売元メーカー' %>
+        <%#= f.collection_select :maker_id, Maker.all, :id, :maker, selected: @search_params[:maker], include_blank: '選択'%>
+      </div>
+    
+      <%= f.submit '絞り込み', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+      評価順で並べ替えたい
+    <br>
+    <br>
+    <% @reviews.each do |review| %>
+    <li>ユーザネーム　<%= review.user.name %></li>
+    <li>ゲームタイトル　<%= review.game.title %></li>
+    <li>発売元メーカー　<%= review.game.maker.maker %></li>
+    <li>評価　<%= review.score %></li>
+    <ul class="list-unstyled">
+      <li>
+        <p class="btn btn-info btn-sm" >レビューの表示・非表示</p>
+        <ul class="list-unstyled" style="display: none;">
+          <li class="content1-1">投稿日時　<%= review.created_at %></li>
+          <li class="content1-2"><%= review.review %></li>
+          <br>
+        </ul>
+      </li>
+      <li>
+        <p class="btn btn-info btn-sm">コメントの表示・非表示</p>
+        <ul class="list-unstyled" style="display: none;">
+          <li>
+            <% comments = Comment.where(review_id: review.id) %>
+            <% comments.each do |comment| %>
+              投稿日時: <%= comment.created_at  %>　ユーザネーム: <%= comment.user.name  %>
+              <br>
+              コメント内容:　<%= comment.comment  %>
+              <br>
+              <br>
+            <% end %>
+            <%= link_to 'コメント投稿画面へ', new_review_comment_path(review.id), class: 'btn btn-sm btn-primary' %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <br>
+    <br>
+    <% end %>
+    
+  </ul>
+  <%= paginate @reviews %>
+</div>
+
+<% end %>
 
 
 <script>
