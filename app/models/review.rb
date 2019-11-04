@@ -2,6 +2,8 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :game
   has_many :comment
+  has_many :favorites_reviews, foreign_key: 'review_id', dependent: :destroy
+  has_many :users, through: :favorites_reviews
   
   scope :search, -> (search_params) do
     return if search_params.blank?

@@ -52,9 +52,14 @@ class UsersController < ApplicationController
     @followings = @user.followings.page(params[:page])
   end
   
-  def followings
+  def review_likes
     @user = User.find(params[:id])
-    @followings = @user.followings.page(params[:page])
+    @favreviews = @user.favreviews.page(params[:page])
+  end
+  
+  def game_likes
+    @user = User.find(params[:id])
+    @favgames = @user.favgames.page(params[:page])
   end
   
   private

@@ -34,7 +34,7 @@
     <li>ユーザネーム　<%= review.user.name %></li>
     <p><%= link_to 'ユーザ詳細へ', user_path(review.user), class: 'btn btn-sm btn-primary' %></p>
     <li>ゲームタイトル　<%= review.game.title %></li>
-    <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
+    <p><%= render 'favorites_games/like_button', game: review.game %></p>
     <li>発売元メーカー　<%= review.game.maker.maker %></li>
     <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
     <li>評価　<%= review.score %></li>
@@ -44,7 +44,7 @@
         <ul class="list-unstyled" style="display: none;">
           <li class="content1-1">投稿日時　<%= review.created_at %></li>
           <li class="content1-2"><%= review.review %></li>
-          <li class="content1-3"><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></li>
+          <li class="content1-3"><%= render 'favorites_reviews/like_button', review: review %></li>
           <br>
         </ul>
       </li>

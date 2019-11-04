@@ -1,5 +1,5 @@
 <ul class="list-unstyled">
-  <li><h4>ユーザ一覧</h4></li> 
+  <li><h4>お気に入りユーザ一覧</h4></li> 
   <br>
   <% followings.each do |following| %>
     <li><h5><%= following.name %>  <%= link_to 'ユーザ詳細へ', user_path(following), class: 'btn btn-sm btn-primary' %></h5></li>

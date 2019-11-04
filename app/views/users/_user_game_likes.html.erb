@@ -1,0 +1,12 @@
+<ul class="list-unstyled">
+  <li><h4>お気に入りゲーム一覧</h4></li> 
+  <br>
+  <% favgames.each do |favgame| %>
+    <li><h5>ゲームタイトル:　<%= favgame.title %></h5></li>
+    <br>
+    <%= render 'favorites_games/like_button', game: favgame %>
+    <br>
+    <br>
+  <% end %>
+</ul>
+</div>

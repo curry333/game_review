@@ -1,0 +1,16 @@
+<ul class="list-unstyled">
+  <li><h4>お気に入りレビュー一覧</h4></li> 
+  <br>
+  <% favreviews.each do |favreview| %>
+    <li><h5>ユーザネーム:　<%= favreview.user.name %></h5></li>
+    <li><h5>ゲームタイトル:　<%= favreview.game.title %></h5></li>
+    <li><h5>発売元メーカー:　<%= favreview.game.maker.maker %></h5></li>
+    <li><h5>評価:　<%= favreview.score %></h5></li>
+    <li><h5>レビュー:　<%= favreview.review %></h5></li>
+    <br>
+    <%= render 'favorites_reviews/like_button', review: favreview %>
+    <br>
+    <br>
+  <% end %>
+</ul>
+</div>
