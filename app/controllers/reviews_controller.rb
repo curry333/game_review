@@ -3,8 +3,8 @@ class ReviewsController < ApplicationController
   before_action :correct_user, only: [:destroy, :edit, :update]
   
   def index
-    @search_params = user_search_params
-    @reviews = Review.search(@search_params).order(id: :desc).page(params[:page])
+    @query = Review.order(id: :desc).page(params[:page]).ransack(params[:q])
+    @reviews = @query.result(distinct: true)
   end
 
   def new
@@ -48,10 +48,6 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:game_id, :score, :review)
-  end
-  
-  def user_search_params
-    params.fetch(:search, {}).permit(:name, :game_id, :maker_id)
   end
   
   def correct_user
