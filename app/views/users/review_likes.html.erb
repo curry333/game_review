@@ -7,7 +7,7 @@
       <li class="nav-item"><a href="<%= favindex_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favindex_user_path(@user)) %>">お気に入りユーザ</a></li>
       <li class="nav-item"><a href="<%= review_likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(review_likes_user_path(@user)) %>">お気に入りレビュー</a></li>
       <li class="nav-item"><a href="<%= game_likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(game_likes_user_path(@user)) %>">お気に入りゲームタイトル</a></li>
-      <li class="nav-item"><a href="#" class="nav-link <%#= 'active' if current_page?(followings_user_path(@user)) %>">お気に入り発売元メーカー</a></li>
+      <li class="nav-item"><a href="<%= maker_likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(maker_likes_user_path(@user)) %>">お気に入り発売元メーカー</a></li>
 </ul>
 
 <%= render 'user_review_likes', favreviews: @favreviews %>

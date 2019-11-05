@@ -10,4 +10,4 @@
       <li class="nav-item"><a href="<%= maker_likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(maker_likes_user_path(@user)) %>">お気に入り発売元メーカー</a></li>
 </ul>
 
-<%= render 'user_following', followings: @followings %>
+<%= render 'user_maker_likes', favmakers: @favmakers %>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get :review_likes
       get :game_likes
+      get :maker_likes
       get :favindex
     end
   end
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :favorites_users, only: [:create, :destroy]
   resources :favorites_reviews, only: [:create, :destroy]
   resources :favorites_games, only: [:create, :destroy]
+  resources :favorites_makers, only: [:create, :destroy]
   resources :makers, only: [:new, :create]
   resources :games, only: [:new, :create]
   resources :reviews, only: [:index, :new, :create, :destroy, :edit, :update] do

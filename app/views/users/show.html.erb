@@ -30,7 +30,7 @@
       <li>ゲームタイトル　<%= review.game.title %></li>
       <p><%= render 'favorites_games/like_button', game: review.game %></p>
       <li>発売元メーカー　<%= review.game.maker.maker %></li>
-      <p><%= link_to 'お気に入り登録 あとでパス変える', root_url, class: 'btn btn-sm btn-primary' %></p>
+      <p><%= render 'favorites_makers/like_button', maker: review.game.maker %></p>
       <li>評価　<%= review.score %></li>
       <ul class="list-unstyled">
         <li>

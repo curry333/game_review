@@ -1,0 +1,12 @@
+<ul class="list-unstyled">
+  <li><h4>お気に入りメーカー一覧</h4></li> 
+  <br>
+  <% favmakers.each do |favmaker| %>
+    <li><h5>発売元メーカー:　<%= favmaker.maker %></h5></li>
+    <br>
+    <%= render 'favorites_makers/like_button', maker: favmaker %>
+    <br>
+    <br>
+  <% end %>
+</ul>
+</div>

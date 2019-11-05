@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :favreviews, through: :favorites_reviews, source: :review
   has_many :favorites_games
   has_many :favgames, through: :favorites_games, source: :game
+  has_many :favorites_makers
+  has_many :favmakers, through: :favorites_makers, source: :maker
   
   def follow(other_user)
     unless self == other_user
@@ -59,4 +61,19 @@ class User < ApplicationRecord
     self.favgames.include?(game)
   end
   
+  
+  
+  
+  def maker_like(maker)
+    favorites_makers.find_or_create_by(maker_id: maker.id)
+  end
+
+  def maker_unlike(maker)
+    favorites_maker = favorites_makers.find_by(maker_id: maker.id)
+    favorites_maker.destroy if favorites_maker
+  end
+  
+  def  favmaker?(maker)
+    self.favmakers.include?(maker)
+  end
 end

@@ -62,6 +62,11 @@ class UsersController < ApplicationController
     @favgames = @user.favgames.page(params[:page])
   end
   
+  def maker_likes
+    @user = User.find(params[:id])
+    @favmakers = @user.favmakers.page(params[:page])
+  end
+  
   private
 
   def user_params
