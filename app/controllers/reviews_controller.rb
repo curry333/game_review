@@ -3,8 +3,8 @@ class ReviewsController < ApplicationController
   before_action :correct_user, only: [:destroy, :edit, :update]
   
   def index
-    @query = Review.order(id: :desc).page(params[:page]).ransack(params[:q])
-    @reviews = @query.result(distinct: true)
+    @query = Review.order(id: :desc).ransack(params[:q])
+    @reviews = @query.result(distinct: true).page(params[:page])
   end
 
   def new

@@ -1,8 +1,29 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <ul class="list-unstyled">
   <li><h4>お気に入りゲーム一覧</h4></li> 
   <br>
   <% favgames.each do |favgame| %>
     <li><h5>ゲームタイトル:　<%= favgame.title %></h5></li>
+    
+    <p class="btn btn-info btn-sm">このゲームのレビューの表示・非表示</p>
+    <ul class="list-unstyled" style="display: none;">
+      <li>
+        <% games= favgame.review %>
+        <% games.each do |game| %>
+          <br>
+          ユーザネーム:　<%= game.user.name %>
+          <br>
+          評価:　<%= game.score %>
+          <br>
+          レビュー:　<%= game.review %>
+          <br>
+          <br>
+          --------------------------------
+        <% end %>
+      </li>
+    </ul>
+        
     <br>
     <%= render 'favorites_games/like_button', game: favgame %>
     <br>
@@ -10,3 +31,17 @@
   <% end %>
 </ul>
 </div>
+
+
+<script>
+$(function(){
+ 
+    //.accordion1の中のp要素がクリックされたら
+	$('.list-unstyled p').click(function(){
+ 
+		//クリックされた.accordion1の中のp要素に隣接するul要素が開いたり閉じたりする。
+		$(this).next('ul').slideToggle();
+ 
+	});
+});
+</script>

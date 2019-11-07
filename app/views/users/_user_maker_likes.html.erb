@@ -1,8 +1,24 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <ul class="list-unstyled">
   <li><h4>お気に入りメーカー一覧</h4></li> 
   <br>
   <% favmakers.each do |favmaker| %>
     <li><h5>発売元メーカー:　<%= favmaker.maker %></h5></li>
+    
+    <p class="btn btn-info btn-sm">このメーカーのゲームの表示・非表示</p>
+    <ul class="list-unstyled" style="display: none;">
+      <li>
+        <% makers= favmaker.game %>
+        <% makers.each do |maker| %>
+          <br>
+          ゲームタイトル:　<%= maker.title %>　<%= render 'favorites_games/like_button', game: maker %>
+          <br>
+          --------------------------------
+        <% end %>
+      </li>
+    </ul>
+    
     <br>
     <%= render 'favorites_makers/like_button', maker: favmaker %>
     <br>
@@ -10,3 +26,17 @@
   <% end %>
 </ul>
 </div>
+
+
+<script>
+$(function(){
+ 
+    //.accordion1の中のp要素がクリックされたら
+	$('.list-unstyled p').click(function(){
+ 
+		//クリックされた.accordion1の中のp要素に隣接するul要素が開いたり閉じたりする。
+		$(this).next('ul').slideToggle();
+ 
+	});
+});
+</script>

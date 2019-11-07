@@ -10,9 +10,16 @@
   <ul class="list-unstyled">
     
     <%= search_form_for(@query, url: reviews_path) do |f| %>
-      <%= f.label :user_name_or_game_title_or_game_maker_maker, "ユーザネーム or ゲームタイトル or 発売元メーカー " %>
+      <%= f.label :user_name_or_game_title_or_game_maker_maker, "ユーザ,ゲーム,メーカーのいずれかで検索" %>
+      <br>
       <%= f.search_field :user_name_or_game_title_or_game_maker_maker_cont %>
-
+      <br>
+      <br>
+      <%= f.label :score, "評　価" %>
+      <br>
+      <%= f.search_field :score_gteq %>以上〜 <%= f.search_field :score_lt %>未満
+      <br>
+      <br>
       <%= f.submit %>
     <% end %>
     
@@ -71,7 +78,7 @@
   <ul class="list-unstyled">
     
     <%= search_form_for(@query, url: reviews_path) do |f| %>
-      <%= f.label :user_name_or_game_title_or_game_maker_maker, "ユーザネーム or ゲームタイトル or 発売元メーカー " %>
+      <%= f.label :user_name_or_game_title_or_game_maker_maker, "ユーザ,ゲーム,メーカーのいずれかで検索" %>
       <br>
       <%= f.search_field :user_name_or_game_title_or_game_maker_maker_cont %>
       <br>
